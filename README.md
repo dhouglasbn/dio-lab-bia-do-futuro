@@ -20,13 +20,19 @@ Agente inteligente de educação financeira desenvolvido no laboratório **Bia d
 
 ## 🏗️ Arquitetura
 
+```mermaid
+flowchart TD
+    A[Usuário] --> B[Streamlit]
+    B --> C[Gemini Flash]
+    C --> D[Base de Conhecimento]
+    D --> C
+    C --> E[Resposta Educativa]
 ```
-Usuário → Streamlit (Interface) → LLM via Ollama (local)
-                                       ↕
-                              Base de Conhecimento (data/)
-                                       ↓
-                              Validação → Resposta
-```
+
+**Stack:**
+- Interface: Streamlit
+- LLM: Gemini Flash 3.5
+- Dados: JSON/CSV mockados
 
 ---
 
@@ -79,14 +85,11 @@ O comportamento do Edu é definido por um **system prompt** com regras claras:
 ## 🚀 Como Executar
 
 ```bash
-# Instale as dependências
-pip install streamlit ollama
+# Instalar dependências
+pip install streamlit google-genai python-dotenv
 
-# Suba o modelo local
-ollama run llama3
-
-# Execute a aplicação
-streamlit run src/app.py
+# Rodar a aplicação
+streamlit run app.py
 ```
 
 ---
@@ -96,7 +99,7 @@ streamlit run src/app.py
 | Categoria | Ferramenta |
 |---|---|
 | Interface | [Streamlit](https://streamlit.io/) |
-| LLM | [Ollama](https://ollama.ai/) (local) |
+| LLM | [Gemini](https://gemini.google.com/?hl=pt-BR) |
 | Dados | JSON / CSV mockados |
 | Diagramas | [Mermaid](https://mermaid.js.org/) |
 
