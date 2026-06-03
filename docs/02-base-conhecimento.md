@@ -2,12 +2,12 @@
 
 ## Dados Utilizados
 
-| Arquivo | Formato | Para que serve no Edu |
-|---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores, ou seja, dar continuidade ao atendimento de forma mais eficiente. |
-| `perfil_investidor.json` | JSON | Personalizar as explicações sobre as dúvidas e necessidades de aprendizado do cliente. |
-| `produtos_financeiros.json` | JSON | Conhecer os produtos disponíveis para que eles possam ser ensinados ao cliente. |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente e usar essas informações de forma didática. |
+| Arquivo                     | Formato | Para que serve no Edu                                                                                   |
+| --------------------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| `historico_atendimento.csv` | CSV     | Contextualizar interações anteriores, ou seja, dar continuidade ao atendimento de forma mais eficiente. |
+| `perfil_investidor.json`    | JSON    | Personalizar as explicações sobre as dúvidas e necessidades de aprendizado do cliente.                  |
+| `produtos_financeiros.json` | JSON    | Conhecer os produtos disponíveis para que eles possam ser ensinados ao cliente.                         |
+| `transacoes.csv`            | CSV     | Analisar padrão de gastos do cliente e usar essas informações de forma didática.                        |
 
 ---
 
@@ -22,6 +22,7 @@ O produto Fundo Imobiliário (FII) substituiu o Fundo Multimercado, pois pessoal
 ## Estratégia de Integração
 
 ### Como os dados são carregados?
+
 > Descreva como seu agente acessa a base de conhecimento.
 
 Existem duas possibilidades, injetar os dados diretamente no prompt (Ctrl + C, Ctrl + V) ou carregar os arquivos via código, como no exemplo abaixo:
@@ -30,20 +31,14 @@ Existem duas possibilidades, injetar os dados diretamente no prompt (Ctrl + C, C
 import pandas as pd
 import json
 
-# CSVs
-historico = pd.read_csv('data/historico_atendimento.csv')
-transacoes = pd.read_csv('data/transacoes.csv')
-
-# JSONs
-with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
-    perfil = json.load(f)
-
-with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
-    produtos = json.load(f)
-
+perfil = json.load(open('../data/perfil_investidor.json'))
+transacoes = pd.read_csv('../data/perfil_investidor.json')
+historico = pd.read_csv('../data/historico_atendimento.csv')
+produtos = json.load(open('../data/perfil_investidor.json'))
 ```
 
 ### Como os dados são usados no prompt?
+
 > Os dados vão no system prompt? São consultados dinamicamente?
 
 Para simplificar, podemos simplesmente "injetar" os dados em nosso prompt, garantindo que o Agente tenha o melhor contexto possível. Lembrando que, em soluções mais robustas, o ideal é que essas informações sejam carregadas dinâmicamente para que possamos ganhar flexibilidade.
